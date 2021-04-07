@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "220595388209",
+    "project_id": "shopapp-ccf26",
+    "storage_bucket": "shopapp-ccf26.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220595388209:android:ea22a0223f9511087bba10",
+        "android_client_info": {
+          "package_name": "fi.oamk.androidapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220595388209-ejoloq0ieudivfmp3p9pagci0nhn71na.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUfTWnGT-LZHZub0PVaSQEfbThk1KsM-M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220595388209-ejoloq0ieudivfmp3p9pagci0nhn71na.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
