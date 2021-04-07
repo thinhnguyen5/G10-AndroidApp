@@ -86,7 +86,7 @@ class RegisterActivity : AppCompatActivity() {
         tvLogin = findViewById(R.id.tv_login)
         tvLogin.setOnClickListener {
 //            Toast.makeText(this, "Login", Toast.LENGTH_LONG).show()
-            startActivity(Intent(this, MainActivity ::class.java))
+            startActivity(Intent(this, ThirdFragment ::class.java))
         }
 
     }
