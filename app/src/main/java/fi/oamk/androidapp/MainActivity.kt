@@ -1,7 +1,9 @@
 package fi.oamk.androidapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -19,4 +21,9 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView.setupWithNavController(navController)
     }
-}
+
+    fun signup(view: View) {
+        // add method
+        val intent = Intent(this,RegisterActivity::class.java)
+        startActivity(intent)
+} }
