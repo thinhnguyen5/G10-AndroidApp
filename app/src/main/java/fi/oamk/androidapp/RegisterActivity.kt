@@ -29,7 +29,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        auth = Firebase.auth
+        auth = FirebaseAuth.getInstance();
 
         edUsername = findViewById(R.id.username_editText_register)
         edEmail = findViewById(R.id.email_editText_register)
@@ -66,6 +66,8 @@ class RegisterActivity : AppCompatActivity() {
                 edPassword.requestFocus();
                 return@setOnClickListener;
             }
+
+//            Log.e("du oi: ", "hahahaha");
 //
 //            // Firebase Authentication to create a user with email and password
 ////            auth.createUserWithEmailAndPassword(email, password)
@@ -89,5 +91,18 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(Intent(this, ThirdFragment ::class.java))
         }
 
+    }
+
+    //Check user is Logined or not
+    override fun onStart() {
+        super.onStart()
+        val user = auth.currentUser;
+
+        if (user != null) {
+            Log.e("Hi", "Du Pham!");
+        }
+        else {
+            Log.e("user status: ", "empty!");
+        }
     }
 }
