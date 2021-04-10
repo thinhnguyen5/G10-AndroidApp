@@ -1,6 +1,7 @@
 package fi.oamk.androidapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,20 +9,35 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import fi.oamk.androidapp.dummy.DummyContent
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 /**
  * A fragment representing a list of Items.
  */
 class ItemFragment : Fragment() {
 
-    private var columnCount = 1
+    private lateinit var database: DatabaseReference
+
+    private lateinit var items: ArrayList<String>
+    private lateinit var rcList: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
+        database = Firebase.database.reference
+
+        items = arrayListOf()
+
+//        for (i in 0..10) {
+//            items.add("Item $i")
+//        }
+        database.child("items").get().addOnSuccessListener {
+            if (it.value != null) {
+//                val itemsFromDB = it as HashMap<String, Any>
+                Log.e("day ne: ", "$it")
+            }
         }
     }
 
@@ -29,31 +45,10 @@ class ItemFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_item_list, container, false)
 
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = MyItemRecyclerViewAdapter(DummyContent.ITEMS)
-            }
-        }
+        rcList = view.findViewById(R.id.list)
+        rcList.layoutManager = LinearLayoutManager(context)
+        rcList.adapter = MyItemRecyclerViewAdapter(items)
+
         return view
-    }
-
-    companion object {
-
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
-
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-                ItemFragment().apply {
-                    arguments = Bundle().apply {
-                        putInt(ARG_COLUMN_COUNT, columnCount)
-                    }
-                }
     }
 }
