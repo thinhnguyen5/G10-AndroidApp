@@ -26,4 +26,10 @@ class MainActivity : AppCompatActivity() {
         // add method
         val intent = Intent(this,RegisterActivity::class.java)
         startActivity(intent)
-} }
+}
+
+    fun signin(view: View) {
+        val intent = Intent(this,LoginActivity::class.java)
+        startActivity(intent)
+    }
+}
