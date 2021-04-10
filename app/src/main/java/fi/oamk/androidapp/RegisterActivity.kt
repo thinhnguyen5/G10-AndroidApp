@@ -69,20 +69,18 @@ class RegisterActivity : AppCompatActivity() {
 
 //            Log.e("du oi: ", "hahahaha");
 //
-//            // Firebase Authentication to create a user with email and password
-////            auth.createUserWithEmailAndPassword(email, password)
-////                .addOnCompleteListener{
-////                    if (!it.isSuccessful) {
-////                        Toast.makeText(this, "create Fail", Toast.LENGTH_LONG).show()
-////                        return@addOnCompleteListener
-////                    }
-////                    else {
-////                        // else if successful
-////                        val user = auth.currentUser
-////                        Toast.makeText(this, "Successfully created user with uid: " + user.uid, Toast.LENGTH_LONG).show()
-//////                        Log.d("RegisterActivity", "Successfully created user with uid: ${it.result.user.uid}")
-////                    }
-////                }
+//             Firebase Authentication to create a user with email and password
+//            auth.createUserWithEmailAndPassword(email, password)
+//                .addOnCompleteListener (this) { task ->
+//                    if (task.isSuccessful) {
+//                        Toast.makeText(this, "Register Successfully", Toast.LENGTH_LONG).show()
+//                        return@addOnCompleteListener
+//                    }
+//                    else {
+//                        // else if not successful
+//                        Toast.makeText(this, "Register Fail", Toast.LENGTH_LONG).show()
+//                    }
+//                }
         }
 
         tvLogin = findViewById(R.id.tv_login)
@@ -94,15 +92,14 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     //Check user is Logined or not
-    override fun onStart() {
-        super.onStart()
-        val user = auth.currentUser;
-
-        if (user != null) {
-            Log.e("Hi", "Du Pham!");
-        }
-        else {
-            Log.e("user status: ", "empty!");
-        }
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        val user = auth.currentUser;
+//        if (user != null) {
+//            Log.e("Hi", "Du Pham!");
+//        }
+//        else {
+//            Log.e("user status: ", "empty!");
+//        }
+//    }
 }
