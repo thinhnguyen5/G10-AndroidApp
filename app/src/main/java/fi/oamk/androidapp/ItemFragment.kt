@@ -35,8 +35,15 @@ class ItemFragment : Fragment() {
 //        }
         database.child("items").get().addOnSuccessListener {
             if (it.value != null) {
-//                val itemsFromDB = it as HashMap<String, Any>
-                Log.e("day ne: ", "$it")
+//                Log.e("day ne: ", "$it")
+                val itemsFromDB = it.value as HashMap<String, Any>
+                items.clear()
+                itemsFromDB.map { (key, value) ->
+                    val itemFromDb = value as HashMap<String, Any>
+                    val name = itemFromDb.get("name").toString()
+                    items.add(name)
+                }
+                rcList.adapter?.notifyDataSetChanged()
             }
         }
     }
