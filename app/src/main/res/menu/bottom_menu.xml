@@ -14,7 +14,7 @@
         />
 
     <item
-        android:title="Sign In"
+        android:title="Authentication"
         android:icon="@drawable/ic_person"
         android:id="@+id/thirdFragment"/>
 </menu>

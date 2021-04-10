@@ -12,11 +12,11 @@
     <fragment
         android:id="@+id/thirdFragment"
         android:name="fi.oamk.androidapp.ThirdFragment"
-        android:label="order_history"
+        android:label="Main"
         tools:layout="@layout/fragment_third" />
     <fragment
         android:id="@+id/secondFragment"
         android:name="fi.oamk.androidapp.SecondFragment"
-        android:label="Sign_In"
+        android:label="Oder_History"
         tools:layout="@layout/fragment_second" />
 </navigation>
