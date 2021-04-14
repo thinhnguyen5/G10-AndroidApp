@@ -17,4 +17,5 @@
         android:title="Authentication"
         android:icon="@drawable/ic_person"
         android:id="@+id/thirdFragment"/>
+
 </menu>
