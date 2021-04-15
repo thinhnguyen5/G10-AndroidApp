@@ -7,13 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-/**
- * A fragment representing a list of Items.
- */
+
 class ItemFragment : Fragment() {
 
     private lateinit var database: DatabaseReference
@@ -43,7 +42,7 @@ class ItemFragment : Fragment() {
                     val pricenum = itemFromDb.get("price").toString()
                     val price = NumberFormatException(pricenum)
 //                    val tam = price + 2
-                    val item = Item(name, image, pricenum)
+                    val item = Item(key, name, image, pricenum)
 //                    Log.e("item", "(($price)+2)")
                     items.add(item)
                 }

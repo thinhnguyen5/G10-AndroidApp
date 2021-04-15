@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -31,5 +32,12 @@ class MainActivity : AppCompatActivity() {
     fun signin(view: View) {
         val intent = Intent(this,LoginActivity::class.java)
         startActivity(intent)
+    }
+
+    fun seeMore(view: View) {
+//        Toast.makeText(this, "See More Button", Toast.LENGTH_LONG).show()
+        startActivity(Intent(this, DetailsActivity::class.java).apply {
+            putExtra("key", view.tag.toString())
+        })
     }
 }

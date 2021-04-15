@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
@@ -24,6 +25,7 @@ class MyItemRecyclerViewAdapter(
         holder.nameView.text = item.name
         Picasso.get().load(item.image).into(holder.imageView)
         holder.priceView.text = item.price
+        holder.btn_SeeMore.tag = item.key
     }
 
     override fun getItemCount(): Int = values.size
@@ -32,5 +34,6 @@ class MyItemRecyclerViewAdapter(
         val nameView: TextView = view.findViewById(R.id.name)
         val imageView: ImageView = view.findViewById(R.id.image)
         val priceView: TextView = view.findViewById(R.id.price)
+        val btn_SeeMore: Button = view.findViewById(R.id.btn_seemore)
     }
 }

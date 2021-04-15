@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="horizontal"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -33,7 +34,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_gravity="center">
                 <TextView
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
@@ -49,6 +51,13 @@
                     android:layout_margin="@dimen/text_margin"
                     android:textAppearance="?attr/textAppearanceListItem"
                     android:textColor="@color/black"/>
+
+                <Button
+                    android:id="@+id/btn_seemore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="More Details"
+                    android:onClick="seeMore"/>
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
