@@ -4,14 +4,13 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.squareup.picasso.Picasso
 
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem].
- * TODO: Replace the implementation with code for your data type.
- */
+
 class MyItemRecyclerViewAdapter(
-        private val values: ArrayList<String>)
+        private val values: ArrayList<Item>)
     : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,12 +21,16 @@ class MyItemRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.nameView.text = item
+        holder.nameView.text = item.name
+        Picasso.get().load(item.image).into(holder.imageView)
+        holder.priceView.text = item.price
     }
 
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nameView: TextView = view.findViewById(R.id.name)
+        val imageView: ImageView = view.findViewById(R.id.image)
+        val priceView: TextView = view.findViewById(R.id.price)
     }
 }
