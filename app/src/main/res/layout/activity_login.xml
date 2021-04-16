@@ -28,6 +28,7 @@
             android:layout_marginTop="20dp"
             android:drawableStart="@drawable/ic_person"
             android:hint="Username"
+            android:inputType="textEmailAddress"
             android:drawablePadding="10dp"
             android:id="@+id/et_username"
             android:layout_width="match_parent"
@@ -59,6 +60,7 @@
             android:layout_gravity="end"/>
 
         <Button
+            android:onClick="login"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_width="match_parent"
