@@ -12,7 +12,7 @@
     <fragment
         android:id="@+id/thirdFragment"
         android:name="fi.oamk.androidapp.ThirdFragment"
-        android:label="Main"
+        android:label="Profile"
         tools:layout="@layout/fragment_third" />
     <fragment
         android:id="@+id/secondFragment"
