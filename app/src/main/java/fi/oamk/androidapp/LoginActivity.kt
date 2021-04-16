@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
                         if(task.isSuccessful) {
                             val intent = Intent(this,MainActivity::class.java).apply {
                                 putExtra("email",email)
-                          }
+                            }
                             startActivity(intent)
                         }else{
                             val toast = Toast.makeText(this, "Invalid login", Toast.LENGTH_SHORT)
@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onSupportNavigateUp(): Boolean {
+    //    override fun onSupportNavigateUp(): Boolean {
 //        onBackPressed()
 //        return super.onSupportNavigateUp()
 //

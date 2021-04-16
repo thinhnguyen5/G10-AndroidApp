@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fi.oamk.androidapp">
-<uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidApp">
+<<<<<<< HEAD
         <activity android:name=".LoginActivity">
+=======
+        <activity android:name=".DetailsActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/SignInPage"
+            android:windowSoftInputMode="adjustResize">
+>>>>>>> ef8487cbfe00292301face3723b501ae9fd9a9ab
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
