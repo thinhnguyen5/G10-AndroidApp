@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/firstFragment">
+    <fragment
+        android:id="@+id/firstFragment"
+        android:name="fi.oamk.androidapp.ItemFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_item_list" />
+    <fragment
+        android:id="@+id/thirdFragment"
+        android:name="fi.oamk.androidapp.ThirdFragment"
+        android:label="Main"
+        tools:layout="@layout/fragment_third" />
+    <fragment
+        android:id="@+id/secondFragment"
+        android:name="fi.oamk.androidapp.SecondFragment"
+        android:label="Oder_History"
+        tools:layout="@layout/fragment_second" />
+</navigation>
