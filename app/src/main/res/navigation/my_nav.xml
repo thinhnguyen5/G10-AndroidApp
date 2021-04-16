@@ -17,6 +17,6 @@
     <fragment
         android:id="@+id/secondFragment"
         android:name="fi.oamk.androidapp.SecondFragment"
-        android:label="Oder_History"
+        android:label="Oder History"
         tools:layout="@layout/fragment_second" />
 </navigation>
