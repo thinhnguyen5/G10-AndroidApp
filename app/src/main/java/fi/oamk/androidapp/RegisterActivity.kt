@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -70,17 +71,16 @@ class RegisterActivity : AppCompatActivity() {
 //            Log.e("du oi: ", "hahahaha");
 //
 //             Firebase Authentication to create a user with email and password
-//            auth.createUserWithEmailAndPassword(email, password)
-//                .addOnCompleteListener (this) { task ->
-//                    if (task.isSuccessful) {
-//                        Toast.makeText(this, "Register Successfully", Toast.LENGTH_LONG).show()
-//                        return@addOnCompleteListener
-//                    }
-//                    else {
-//                        // else if not successful
-//                        Toast.makeText(this, "Register Fail", Toast.LENGTH_LONG).show()
-//                    }
-//                }
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful){
+                        Toast.makeText(this, "Registration Successfully!", Toast.LENGTH_LONG).show()
+                        startActivity(Intent(this, LoginActivity::class.java))
+                    }
+                    else {
+                        Toast.makeText(this, "Registration Fail!", Toast.LENGTH_LONG).show()
+                    }
+                }
         }
 
         tvLogin = findViewById(R.id.tv_login)
