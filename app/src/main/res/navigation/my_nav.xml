@@ -10,11 +10,6 @@
         android:label="Home"
         tools:layout="@layout/fragment_item_list" />
     <fragment
-        android:id="@+id/thirdFragment"
-        android:name="fi.oamk.androidapp.ThirdFragment"
-        android:label="Profile"
-        tools:layout="@layout/fragment_third" />
-    <fragment
         android:id="@+id/secondFragment"
         android:name="fi.oamk.androidapp.SecondFragment"
         android:label="Oder History"
