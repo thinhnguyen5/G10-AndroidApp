@@ -25,6 +25,7 @@
             android:theme="@style/SignInPage"
             android:windowSoftInputMode="adjustResize">
         </activity>
+        <activity android:name=".CartActivity" />
     </application>
 
 </manifest>

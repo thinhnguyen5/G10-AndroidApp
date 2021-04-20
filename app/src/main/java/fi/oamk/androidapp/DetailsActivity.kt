@@ -5,15 +5,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
+import kotlin.reflect.typeOf
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -23,6 +21,8 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var tvKey: TextView
     private lateinit var tvName: TextView
     private lateinit var tvprice: TextView
+    private lateinit var etQuantity: EditText
+    private lateinit var tvSumPrice: TextView
 
     private lateinit var btnAddCart: Button
 
@@ -38,6 +38,8 @@ class DetailsActivity : AppCompatActivity() {
         tvKey = findViewById(R.id.key)
         tvName = findViewById(R.id.name)
         tvprice = findViewById(R.id.price)
+        etQuantity = findViewById(R.id.quantity)
+        tvSumPrice = findViewById(R.id.sumPrice)
 
         val key = intent.getStringExtra("key").toString()
         tvKey.text = key
@@ -46,6 +48,11 @@ class DetailsActivity : AppCompatActivity() {
 
         //set status for item
         var tam: String = ""
+
+        //sum price when choose quantity
+        var tam1: Number = 0
+//        Log.e("typeof tam1", "${typeOf<>(tam1)}")
+//        typeOf<>()
 
 
         database.child("items").child(key).get().addOnSuccessListener {
@@ -65,9 +72,11 @@ class DetailsActivity : AppCompatActivity() {
             //
         }
 
+//        tam1 = etQuantity * price
+
         btnAddCart = findViewById(R.id.btn_addCart)
         btnAddCart.setOnClickListener() {
-            Log.d("kakak","$tam")
+//            Log.d("kakak","$tam")
             if (tam == "Out of Stock") {
                 AlertDialog.Builder(this)
                         .setMessage("$tam")
@@ -84,15 +93,15 @@ class DetailsActivity : AppCompatActivity() {
                         .show()
             }
             else {
-                AlertDialog.Builder(this)
-                        .setMessage("Added Successfully!")
-                        .setPositiveButton("OK", object : DialogInterface.OnClickListener {
-                            override fun onClick(p0: DialogInterface?, p1: Int) {
-//                                TODO("Not yet implemented")
-                            }
-                        })
-                        .create()
-                        .show()
+//                AlertDialog.Builder(this)
+//                        .setMessage("Added Successfully!")
+//                        .setPositiveButton("OK", object : DialogInterface.OnClickListener {
+//                            override fun onClick(p0: DialogInterface?, p1: Int) {
+////                                TODO("Not yet implemented")
+//                            }
+//                        })
+//                        .create()
+//                        .show()
             }
 //            Toast.makeText(this, "$tam", Toast.LENGTH_LONG).show()
         }

@@ -13,6 +13,9 @@ import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlin.math.log
 
@@ -68,8 +71,6 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener;
             }
 
-//            Log.e("du oi: ", "hahahaha");
-//
 //             Firebase Authentication to create a user with email and password
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
@@ -92,14 +93,14 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     //Check user is Logined or not
-//    override fun onStart() {
-//        super.onStart()
-//        val user = auth.currentUser;
-//        if (user != null) {
-//            Log.e("Hi", "Du Pham!");
-//        }
-//        else {
-//            Log.e("user status: ", "empty!");
-//        }
-//    }
+    override fun onStart() {
+        super.onStart()
+        val user = auth.currentUser;
+        if (user != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+        else {
+            Log.e("user status: ", "empty!");
+        }
+    }
 }
