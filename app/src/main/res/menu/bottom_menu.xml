@@ -13,4 +13,9 @@
         android:icon="@drawable/ic_history"
         android:id="@+id/secondFragment"
         />
+
+    <item
+        android:title="Profile"
+        android:icon="@drawable/ic_person"
+        android:id="@+id/profileFragment"/>
 </menu>
