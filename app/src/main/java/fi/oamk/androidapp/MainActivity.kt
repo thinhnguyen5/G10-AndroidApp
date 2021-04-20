@@ -22,7 +22,8 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val navController = findNavController(R.id.fragment)
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.firstFragment, R.id.secondFragment, R.id.thirdFragment))
+//        val appBarConfiguration = AppBarConfiguration(setOf(R.id.firstFragment, R.id.secondFragment, R.id.thirdFragment))
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.firstFragment, R.id.secondFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
 
 
@@ -31,7 +32,24 @@ class MainActivity : AppCompatActivity() {
         email = intent.getStringExtra("email").toString()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.app_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.cart -> {
+            this.showCart()
+            true
+        } else -> {
+            super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun showCart() {
+        startActivity(Intent(this, CartActivity::class.java))
+    }
 
     fun signup(view: View) {
         // add method
