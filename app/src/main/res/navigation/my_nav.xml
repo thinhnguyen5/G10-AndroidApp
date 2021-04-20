@@ -11,7 +11,12 @@
         tools:layout="@layout/fragment_item_list" />
     <fragment
         android:id="@+id/secondFragment"
-        android:name="fi.oamk.androidapp.SecondFragment"
+        android:name="fi.oamk.androidapp.OrderHistoryFragment"
         android:label="Oder History"
-        tools:layout="@layout/fragment_second" />
+        tools:layout="@layout/fragment_orderhistory_list" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="fi.oamk.androidapp.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile"/>
 </navigation>
