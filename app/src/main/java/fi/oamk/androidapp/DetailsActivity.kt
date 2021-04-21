@@ -46,6 +46,9 @@ class DetailsActivity : AppCompatActivity() {
 
         database = Firebase.database.reference
 
+        //button Add To Cart
+        btnAddCart = findViewById(R.id.btn_addCart)
+
         //set status for item
         var tam: String = ""
 
@@ -67,45 +70,68 @@ class DetailsActivity : AppCompatActivity() {
                 tvName.text = name.toString()
                 tvprice.text = price.toString()
                 tam = status.toString()
+                Log.e("tam", "$tam")
+                if (tam == "Out of Stock") {
+                    btnAddCart.isEnabled = false
+                    Toast.makeText(this, "DISABLE", Toast.LENGTH_LONG).show()
+                    Log.e("button", "disable")
+                }
+                else {
+                    btnAddCart.setOnClickListener{
+//                        Toast.makeText(this, "$tam", Toast.LENGTH_LONG).show()
+//                        tester1()
+                        val intent = Intent(this, CartActivity::class.java).apply {
+                            putExtra("name", name.toString())
+                        }
+                        startActivity(intent)
+                    }
+                }
             }
         }.addOnFailureListener{
             //
         }
 
 //        tam1 = etQuantity * price
+//        Log.d("taasdzjhgcjhaghdkjgszjkhdgasm", "$tam")
+//        Toast.makeText(this, "$tam", Toast.LENGTH_LONG).show()
 
-        btnAddCart = findViewById(R.id.btn_addCart)
-        btnAddCart.setOnClickListener() {
-//            Log.d("kakak","$tam")
-            if (tam == "Out of Stock") {
-                AlertDialog.Builder(this)
-                        .setMessage("$tam")
-                        .setPositiveButton("OK", object : DialogInterface.OnClickListener {
-                            override fun onClick(p0: DialogInterface?, p1: Int) {
-//                                val intent = Intent(this, MainActivity::class.java)
-//                                startActivity(intent)
-//                                val intent = Intent(this,RegisterActivity::class.java)
-//                                startActivity(intent)
-//                                startActivity(Intent(this, MainActivity::class.java))
-                            }
-                        })
-                        .create()
-                        .show()
-            }
-            else {
+
+
+//        btnAddCart.setOnClickListener() {
+////            Log.d("kakak","$tam")
+//            if (tam == "Out of Stock") {
 //                AlertDialog.Builder(this)
-//                        .setMessage("Added Successfully!")
+//                        .setMessage("$tam")
 //                        .setPositiveButton("OK", object : DialogInterface.OnClickListener {
 //                            override fun onClick(p0: DialogInterface?, p1: Int) {
-////                                TODO("Not yet implemented")
+////                                val intent = Intent(this, MainActivity::class.java)
+////                                startActivity(intent)
+////                                val intent = Intent(this,RegisterActivity::class.java)
+////                                startActivity(intent)
+////                                startActivity(Intent(this, MainActivity::class.java))
 //                            }
 //                        })
 //                        .create()
 //                        .show()
-            }
-//            Toast.makeText(this, "$tam", Toast.LENGTH_LONG).show()
-        }
+//            }
+//            else {
+////                AlertDialog.Builder(this)
+////                        .setMessage("Added Successfully!")
+////                        .setPositiveButton("OK", object : DialogInterface.OnClickListener {
+////                            override fun onClick(p0: DialogInterface?, p1: Int) {
+//////                                TODO("Not yet implemented")
+////                            }
+////                        })
+////                        .create()
+////                        .show()
+//            }
+////            Toast.makeText(this, "$tam", Toast.LENGTH_LONG).show()
+//        }
     }
+
+//    private fun tester1() {
+//        Toast.makeText(this, "$tam", Toast.LENGTH_LONG).show()
+//    }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
