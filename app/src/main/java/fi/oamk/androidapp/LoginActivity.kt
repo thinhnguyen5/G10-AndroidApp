@@ -18,11 +18,9 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
-    private val TAG: String = MainActivity::class.java.name
     private lateinit var edEmail: EditText
     private lateinit var edPassword: EditText
     private lateinit var btnLogin: Button
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
