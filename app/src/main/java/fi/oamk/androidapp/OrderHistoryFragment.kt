@@ -17,7 +17,7 @@ class OrderHistoryFragment : Fragment() {
 
     private lateinit var database: DatabaseReference
 
-    private lateinit var orderhistory: ArrayList<OrderHistory>
+    private lateinit var history: ArrayList<OrderHistory>
     private lateinit var rcList: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,27 +25,27 @@ class OrderHistoryFragment : Fragment() {
 
         database = Firebase.database.reference
 
-        orderhistory = arrayListOf()
+        history = arrayListOf()
 
 //        for (i in 0..10) {
 //            items.add("Item $i")
 //        }
-        database.child("orderhistory").get().addOnSuccessListener {
+        database.child("history").get().addOnSuccessListener {
             if (it.value != null) {
 //                Log.e("day ne: ", "$it")
-                val orderhistoryFromDB = it.value as HashMap<String, Any>
-                orderhistory.clear()
-                orderhistoryFromDB.map { (key, value) ->
+                val historyFromDB = it.value as HashMap<String, Any>
+                history.clear()
+                historyFromDB.map { (key, value) ->
                     val orderhistoryFromDb = value as HashMap<String, Any>
                     val name = orderhistoryFromDb.get("name").toString()
                     val date = orderhistoryFromDb.get("date").toString()
                     val user = orderhistoryFromDb.get("user").toString()
 
 //                    val tam = price + 2
-                    val orderhistorys = OrderHistory(key, name, date, user)
+                    val orderhistory = OrderHistory(key, name, date, user)
 //                    Log.e("item", "(($price)+2)")
 
-                    orderhistory.add(orderhistorys)
+                    history.add(orderhistory)
                 }
                 rcList.adapter?.notifyDataSetChanged()
             }
@@ -58,7 +58,7 @@ class OrderHistoryFragment : Fragment() {
 
         rcList = view.findViewById(R.id.list1)
         rcList.layoutManager = LinearLayoutManager(context)
-        rcList.adapter = MyOrderHistoryRecyclerViewAdapter(orderhistory)
+        rcList.adapter = MyOrderHistoryRecyclerViewAdapter(history)
 
         return view
     }
