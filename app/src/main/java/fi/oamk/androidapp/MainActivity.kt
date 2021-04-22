@@ -50,7 +50,16 @@ class MainActivity : AppCompatActivity() {
     private fun showCart() {
         startActivity(Intent(this, CartActivity::class.java))
     }
-
+//    fun signup(view: View) {
+//        // add method
+//        val intent = Intent(this, RegisterActivity::class.java)
+//        startActivity(intent)
+//    }
+//
+//    fun signin(view: View) {
+//        val intent = Intent(this,LoginActivity::class.java)
+//        startActivity(intent)
+//    }
     fun signup(view: View) {
         // add method
         val intent = Intent(this,RegisterActivity::class.java)
