@@ -1,18 +1,20 @@
 package fi.oamk.androidapp
 
-import android.content.DialogInterface
-import android.content.Intent
+import android.icu.util.TimeZone.getDefault
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
-import com.google.firebase.database.DatabaseReference
+import com.google.common.eventbus.EventBus
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
-import kotlin.reflect.typeOf
+import fi.oamk.androidapp.eventbus.UpdateCartEvent
+import kotlinx.android.synthetic.main.activity_details.*
+import kotlinx.android.synthetic.main.fragment_profile.*
+import java.util.Locale.getDefault
 
 class DetailsActivity : AppCompatActivity() {
 //class DetailsActivity : Fragment() {
@@ -46,6 +48,9 @@ class DetailsActivity : AppCompatActivity() {
         val key = intent.getStringExtra("key").toString()
         tvKey.text = key
 
+        val email = intent.getStringExtra("email").toString()
+        Log.e("this is email: ", email)
+
         database = Firebase.database.reference
 
         //button Add To Cart
@@ -72,77 +77,45 @@ class DetailsActivity : AppCompatActivity() {
                 tvName.text = name.toString()
                 tvprice.text = price.toString()
                 tam = status.toString()
-                Log.e("tam", "$tam")
+//                Log.e("tam", "$tam")
                 if (tam == "Out of Stock") {
                     btnAddCart.isEnabled = false
                     Toast.makeText(this, "DISABLE", Toast.LENGTH_LONG).show()
-                    Log.e("button", "disable")
+//                    Log.e("button", "disable")
                 }
                 else {
                     btnAddCart.setOnClickListener{
-//                        Toast.makeText(this, "$tam", Toast.LENGTH_LONG).show()
-//                        tester1()
-
-//                        startActivity<MainActivity>("name" to name)
-//                        requireActivity().getSharedPreferences()
-
-                        //pass value but have to redirect to another
-//                        val intent = Intent(this, CartActivity::class.java).apply {
-//                            putExtra("name", name.toString())
-//                        }
-//                        startActivity(intent)
-                        val intent = Intent(this, CartActivity::class.java).apply {
-                            putExtra("name", name.toString())
+                        val quantity = etQuantity.text.toString().trim()
+                        if (quantity.isEmpty()) {
+                            etQuantity.setError("Enter the quantity");
+                            etQuantity.requestFocus();
+                            return@setOnClickListener
                         }
-                        startActivity(intent)
+                        val ref = FirebaseDatabase.getInstance().getReference("cart")
+//                        val cartItem = CartItem(key, email, name as String,
+//                            image as String, price as String, quantity as Int, price as Int)
+                        val cartItem = CartItem()
+                        cartItem.key = key
+                        cartItem.name = name.toString()
+                        cartItem.email = email
+                        cartItem.image = image.toString()
+                        cartItem.price = price.toString()
+                        cartItem.quantity = quantity.toInt()
+                        cartItem.totalPrice = price.toString().toInt()
+
+                        ref.child(key).setValue(cartItem).addOnSuccessListener {
+                            Toast.makeText(this,"Success add to Cart", Toast.LENGTH_LONG).show()
+                        }
+                            .addOnFailureListener {
+                                Toast.makeText(this, "Fail", Toast.LENGTH_LONG).show()
+                            }
                     }
                 }
             }
         }.addOnFailureListener{
             //
         }
-
-//        tam1 = etQuantity * price
-//        Log.d("taasdzjhgcjhaghdkjgszjkhdgasm", "$tam")
-//        Toast.makeText(this, "$tam", Toast.LENGTH_LONG).show()
-
-
-
-//        btnAddCart.setOnClickListener() {
-////            Log.d("kakak","$tam")
-//            if (tam == "Out of Stock") {
-//                AlertDialog.Builder(this)
-//                        .setMessage("$tam")
-//                        .setPositiveButton("OK", object : DialogInterface.OnClickListener {
-//                            override fun onClick(p0: DialogInterface?, p1: Int) {
-////                                val intent = Intent(this, MainActivity::class.java)
-////                                startActivity(intent)
-////                                val intent = Intent(this,RegisterActivity::class.java)
-////                                startActivity(intent)
-////                                startActivity(Intent(this, MainActivity::class.java))
-//                            }
-//                        })
-//                        .create()
-//                        .show()
-//            }
-//            else {
-////                AlertDialog.Builder(this)
-////                        .setMessage("Added Successfully!")
-////                        .setPositiveButton("OK", object : DialogInterface.OnClickListener {
-////                            override fun onClick(p0: DialogInterface?, p1: Int) {
-//////                                TODO("Not yet implemented")
-////                            }
-////                        })
-////                        .create()
-////                        .show()
-//            }
-////            Toast.makeText(this, "$tam", Toast.LENGTH_LONG).show()
-//        }
     }
-
-//    private fun tester1() {
-//        Toast.makeText(this, "$tam", Toast.LENGTH_LONG).show()
-//    }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

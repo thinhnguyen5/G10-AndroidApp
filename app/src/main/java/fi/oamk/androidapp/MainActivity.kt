@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity() {
 //        Toast.makeText(this, "See More Button", Toast.LENGTH_LONG).show()
         startActivity(Intent(this, DetailsActivity::class.java).apply {
             putExtra("key", view.tag.toString())
+            putExtra("email", email)
         })
     }
 }
