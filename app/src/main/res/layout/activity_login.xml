@@ -4,12 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-<<<<<<< HEAD:app/src/main/res/layout/activity_login.xml
     android:background="@color/white"
     tools:context=".LoginActivity">
-=======
-    tools:context=".MainActivity">
->>>>>>> master:app/src/main/res/layout/fragment_third.xml
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -80,19 +76,14 @@
             />
 
         <TextView
-<<<<<<< HEAD:app/src/main/res/layout/activity_login.xml
             android:onClick="signup"
-=======
-            android:onClick="signUp"
-            android:id="@+id/tv_signup"
->>>>>>> master:app/src/main/res/layout/fragment_third.xml
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
             android:text="Sign Up"
+            android:layout_marginBottom="20dp"
             android:textColor="@color/black"
-            android:textSize="21dp" />
+            android:textSize="21dp"
+            android:layout_gravity="center"/>
 
 
     </LinearLayout>
