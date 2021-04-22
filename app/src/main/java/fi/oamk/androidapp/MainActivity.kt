@@ -3,15 +3,15 @@ package fi.oamk.androidapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.view.*
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.zip.Inflater
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,6 +35,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.app_menu,menu)
+
+        var searchItem = menu!!.findItem(R.id.search)
+        var searchView = searchItem.actionView as SearchView
+
+        searchView.queryHint = "Search..."
+        searchView.isIconifiedByDefault = false
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -50,6 +56,8 @@ class MainActivity : AppCompatActivity() {
     private fun showCart() {
         startActivity(Intent(this, CartActivity::class.java))
     }
+
+
 //    fun signup(view: View) {
 //        // add method
 //        val intent = Intent(this, RegisterActivity::class.java)

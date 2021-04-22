@@ -14,7 +14,7 @@ class CartActivity : AppCompatActivity() {
 
     private lateinit var tvTest : EditText
     var recievedName: String = ""
-    private lateinit var ArrayCart: ArrayList<CartItem>
+//    private lateinit var ArrayCart: ArrayList<CartItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
