@@ -91,6 +91,10 @@ class DetailsActivity : AppCompatActivity() {
 //                            putExtra("name", name.toString())
 //                        }
 //                        startActivity(intent)
+                        val intent = Intent(this, CartActivity::class.java).apply {
+                            putExtra("name", name.toString())
+                        }
+                        startActivity(intent)
                     }
                 }
             }
