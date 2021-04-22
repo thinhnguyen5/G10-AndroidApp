@@ -10,8 +10,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlin.math.log
 
@@ -29,7 +33,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        auth = Firebase.auth
+        auth = FirebaseAuth.getInstance();
 
         edUsername = findViewById(R.id.username_editText_register)
         edEmail = findViewById(R.id.email_editText_register)
@@ -66,28 +70,37 @@ class RegisterActivity : AppCompatActivity() {
                 edPassword.requestFocus();
                 return@setOnClickListener;
             }
-//
-//            // Firebase Authentication to create a user with email and password
-////            auth.createUserWithEmailAndPassword(email, password)
-////                .addOnCompleteListener{
-////                    if (!it.isSuccessful) {
-////                        Toast.makeText(this, "create Fail", Toast.LENGTH_LONG).show()
-////                        return@addOnCompleteListener
-////                    }
-////                    else {
-////                        // else if successful
-////                        val user = auth.currentUser
-////                        Toast.makeText(this, "Successfully created user with uid: " + user.uid, Toast.LENGTH_LONG).show()
-//////                        Log.d("RegisterActivity", "Successfully created user with uid: ${it.result.user.uid}")
-////                    }
-////                }
+
+//             Firebase Authentication to create a user with email and password
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful){
+                        Toast.makeText(this, "Registration Successfully!", Toast.LENGTH_LONG).show()
+                        startActivity(Intent(this, LoginActivity::class.java))
+                    }
+                    else {
+                        Toast.makeText(this, "Registration Fail!", Toast.LENGTH_LONG).show()
+                    }
+                }
         }
 
         tvLogin = findViewById(R.id.tv_login)
         tvLogin.setOnClickListener {
 //            Toast.makeText(this, "Login", Toast.LENGTH_LONG).show()
-            startActivity(Intent(this, MainActivity ::class.java))
+            startActivity(Intent(this, LoginActivity ::class.java))
         }
 
+    }
+
+    //Check user is Logined or not
+    override fun onStart() {
+        super.onStart()
+        val user = auth.currentUser;
+        if (user != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+        else {
+            Log.e("user status: ", "empty!");
+        }
     }
 }
