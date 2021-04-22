@@ -22,8 +22,8 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val navController = findNavController(R.id.fragment)
-//        val appBarConfiguration = AppBarConfiguration(setOf(R.id.firstFragment, R.id.secondFragment, R.id.thirdFragment))
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.firstFragment, R.id.secondFragment))
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.firstFragment, R.id.secondFragment, R.id.profileFragment))
+
         setupActionBarWithNavController(navController, appBarConfiguration)
 
 
@@ -56,11 +56,6 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this,RegisterActivity::class.java)
         startActivity(intent)
 }
-
-    fun signin(view: View) {
-        val intent = Intent(this,LoginActivity::class.java)
-        startActivity(intent)
-    }
 
     fun seeMore(view: View) {
 //        Toast.makeText(this, "See More Button", Toast.LENGTH_LONG).show()
