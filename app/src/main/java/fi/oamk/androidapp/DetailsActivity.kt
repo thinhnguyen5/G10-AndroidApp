@@ -11,7 +11,6 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
-import fi.oamk.androidapp.eventbus.UpdateCartEvent
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import java.util.Locale.getDefault
