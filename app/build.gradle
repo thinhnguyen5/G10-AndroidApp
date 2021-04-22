@@ -68,6 +68,15 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx:19.2.2'
     implementation 'androidx.room:room-runtime:2.2.5'
 
+    //////////////////////////22/04/2021///////////////////
+    //Gradle
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    //Notification Badge
+    implementation 'com.nex3z:notification-badge:1.0.4'
+    //EventBus
+    implementation 'org.greenrobot:eventbus:3.2.0'
+
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
