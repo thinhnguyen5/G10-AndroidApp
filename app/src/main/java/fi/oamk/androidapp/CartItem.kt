@@ -1,14 +1,14 @@
 package fi.oamk.androidapp
 
-class CartItem()  {
-    var key:String?= null
-    var email:String?=null
-    var name:String?= null
-    var image:String?=null
-    var price:String?= null
-    var quantity = 0
-    var totalPrice = 0
+data class Cart(
+        val key: String,
+        val name: String,
+        val image: String,
+        val price: String,
+        val quantity: String) {
 }
+
+
 
 //class CartItem(
 ////    var key:String,

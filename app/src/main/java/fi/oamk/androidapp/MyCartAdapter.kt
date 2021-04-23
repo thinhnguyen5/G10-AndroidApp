@@ -13,7 +13,7 @@ import java.lang.StringBuilder
 
 
 class MyCartAdapter(
-    private val values: ArrayList<CartItem>)
+    private val values: ArrayList<Cart>)
     : RecyclerView.Adapter<MyCartAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,12 +23,12 @@ class MyCartAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
-        holder.nameView.text = item.name
-        Picasso.get().load(item.image).into(holder.imageView)
-        holder.priceView.text = item.price
-        holder.quantityView.text = item.quantity.toString()
-        holder.btn_Delete.tag = item.key
+        val cartlist = values[position]
+        holder.nameView.text = cartlist.name
+        Picasso.get().load(cartlist.image).into(holder.imageView)
+        holder.priceView.text = cartlist.price
+        holder.quantityView.text = cartlist.quantity.toString()
+        holder.btn_Delete.tag = cartlist.key
 
 //        holder.btn_Minus.setOnClickListener{minusCartItem(holder,item)}
     }

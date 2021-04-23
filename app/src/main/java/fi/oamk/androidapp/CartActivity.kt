@@ -25,8 +25,8 @@ class CartActivity : Fragment() {
 
     private lateinit var database: DatabaseReference
 
-    private lateinit var cartitems: ArrayList<CartItem>
-    private lateinit var rcItems: RecyclerView
+    private lateinit var cart: ArrayList<Cart>
+    private lateinit var rcList: RecyclerView
 
     private lateinit var btnAddCart: Button
 
@@ -36,12 +36,12 @@ class CartActivity : Fragment() {
         super.onCreate(savedInstanceState)
 
         database = Firebase.database.reference
-        cartitems = arrayListOf()
+        cart = arrayListOf()
 
         database.child("cart").get().addOnSuccessListener {
             if (it.value != null) {
                 val cartFromDB = it.value as HashMap<String, Any>
-                cartitems.clear()
+                cart.clear()
                 cartFromDB.map { (key, value) ->
                     val cartlistFromDB = value as HashMap<String, Any>
                     val name = cartlistFromDB.get("name").toString()
@@ -49,16 +49,10 @@ class CartActivity : Fragment() {
                     val price = cartlistFromDB.get("price")
                     val quantity = cartlistFromDB.get("quantity")
 
-                    val cartItem = CartItem()
-                    cartItem.key = key
-                    cartItem.name = name.toString()
-                    cartItem.image = image.toString()
-                    cartItem.price = price.toString()
-                    cartItem.quantity = quantity.toString().toInt()
-
-                    cartitems.add(cartItem)
+                    val cartlist = Cart(key, name, image, price as String, quantity as String)
+                    cart.add(cartlist)
                 }
-                rcItems.adapter?.notifyDataSetChanged()
+                rcList.adapter?.notifyDataSetChanged()
             }
         }
     }
@@ -67,9 +61,9 @@ class CartActivity : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.activity_cart, container, false)
 
-        rcItems = view.findViewById(R.id.listItems)
-        rcItems.layoutManager = LinearLayoutManager(context)
-        rcItems.adapter = MyCartAdapter(cartitems)
+        rcList = view.findViewById(R.id.listItems)
+        rcList.layoutManager = LinearLayoutManager(context)
+        rcList.adapter = MyCartAdapter(cart)
 
         return view
     }
