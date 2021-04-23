@@ -19,6 +19,7 @@ class ItemFragment : Fragment() {
 
     private lateinit var items: ArrayList<Item>
     private lateinit var rcList: RecyclerView
+    private  lateinit var adapter: MyItemRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,29 +58,11 @@ class ItemFragment : Fragment() {
 
         rcList = view.findViewById(R.id.list)
         rcList.layoutManager = LinearLayoutManager(context)
-        rcList.adapter = MyItemRecyclerViewAdapter(items)
+//        rcList.adapter = MyItemRecyclerViewAdapter(items)
+        adapter = MyItemRecyclerViewAdapter(items)
+        rcList.adapter = adapter
 
         return view
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.app_menu,menu)
-        var searchItem = menu.findItem(R.id.search)
-        var searchView = searchItem.actionView as SearchView
-
-        searchView.queryHint = "Search..."
-        searchView.isIconifiedByDefault = false
-
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.cart -> {
-            startActivity(Intent(activity, CartActivity::class.java))
-            true
-        } else -> {
-            super.onOptionsItemSelected(item)
-        }
     }
 
 

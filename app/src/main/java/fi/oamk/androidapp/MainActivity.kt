@@ -4,16 +4,22 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.zip.Inflater
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var  rcList :RecyclerView
+    private  lateinit var  adapter: MyItemRecyclerViewAdapter
+
 
     var email: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +47,38 @@ class MainActivity : AppCompatActivity() {
 
         searchView.queryHint = "Search..."
         searchView.isIconifiedByDefault = false
+
+        val magId: Int = resources.getIdentifier("android:id/search_mag_icon", null, null);
+        val magImage: ImageView = searchView!!.findViewById(magId);
+        val searchViewGroup: ViewGroup = magImage.getParent() as ViewGroup
+        searchViewGroup.removeView(magImage)
+
+
+        val queryTextListener = object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(p0: String?): Boolean {
+                adapter.filter.filter(p0)
+                return true
+            }
+
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                TODO("Not yet implemented")
+            }
+        }
+        searchView.setOnQueryTextListener(queryTextListener)
+
+        val actionExpandListener = object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
+                adapter.filter.filter("")
+                return true
+            }
+
+            override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+                return true
+            }
+        }
+
+        searchItem.setOnActionExpandListener(actionExpandListener)
+
         return super.onCreateOptionsMenu(menu)
     }
 
