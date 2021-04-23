@@ -1,13 +1,13 @@
 package fi.oamk.androidapp
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
+import android.widget.SearchView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -19,6 +19,7 @@ class ItemFragment : Fragment() {
 
     private lateinit var items: ArrayList<Item>
     private lateinit var rcList: RecyclerView
+    private  lateinit var adapter: MyItemRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +58,12 @@ class ItemFragment : Fragment() {
 
         rcList = view.findViewById(R.id.list)
         rcList.layoutManager = LinearLayoutManager(context)
-        rcList.adapter = MyItemRecyclerViewAdapter(items)
+//        rcList.adapter = MyItemRecyclerViewAdapter(items)
+        adapter = MyItemRecyclerViewAdapter(items)
+        rcList.adapter = adapter
 
         return view
     }
+
+
 }

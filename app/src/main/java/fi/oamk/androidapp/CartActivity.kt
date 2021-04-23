@@ -32,6 +32,7 @@ class CartActivity : Fragment() {
 
     private lateinit var tvTest : EditText
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
