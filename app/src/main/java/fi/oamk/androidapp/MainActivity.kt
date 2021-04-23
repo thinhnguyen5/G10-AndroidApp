@@ -48,7 +48,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showCart() {
-        startActivity(Intent(this, CartActivity::class.java))
+        startActivity(Intent(this, CartActivity::class.java).apply {
+            putExtra("email", email)
+        })
     }
 //    fun signup(view: View) {
 //        // add method
