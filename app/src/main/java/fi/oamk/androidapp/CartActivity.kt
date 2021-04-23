@@ -13,72 +13,65 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_details.*
 
-class CartActivity : AppCompatActivity() {
-//class CartActivity : Fragment() {
+class CartActivity : Fragment() {
+
+    private lateinit var database: DatabaseReference
 
     private lateinit var cartitems: ArrayList<CartItem>
     private lateinit var rcItems: RecyclerView
-    private lateinit var layoutManager: RecyclerView.LayoutManager
 
     private lateinit var btnAddCart: Button
 
     private lateinit var tvTest : EditText
-//    private lateinit var ArrayCart: ArrayList<CartItem>
-
-//    override fun onCreateView(
-//            inflater: LayoutInflater, container: ViewGroup?,
-//            savedInstanceState: Bundle?
-//    ): View? {
-//        return inflater.inflate(R.layout.activity_cart, container, false)
-//    }
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        view.findViewById<Button>(R.id.btn_checkout).setOnClickListener {
-////            Toast.makeText(this, "Checkout Button", Toast.LENGTH_LONG).show()
-//            Log.e("ajshdgbjhasgdasgjdas", "this is function Checkout")
-//        }
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cart)
 
-        //////////////////////////cai moi///////////////////////////
-
-        rcItems = findViewById(R.id.listItems)
-//        rcItems.setHasFixedSize(true)
-//        layoutManager
-
+        database = Firebase.database.reference
         cartitems = arrayListOf()
 
-        val name = intent.getStringExtra("name").toString()
-        val price = intent.getStringExtra("price").toString()
-//        tvTest.text = recievedName
-        Log.e("RECIEVED_NAME: ", "$name")
-        Log.e("RECIEVED_PRICE: ", "$price")
+        database.child("cart").get().addOnSuccessListener {
+            if (it.value != null) {
+                val cartFromDB = it.value as HashMap<String, Any>
+                cartitems.clear()
+                cartFromDB.map { (key, value) ->
+                    val cartlistFromDB = value as HashMap<String, Any>
+                    val name = cartlistFromDB.get("name").toString()
+                    val image = cartlistFromDB.get("image").toString()
+                    val price = cartlistFromDB.get("price")
+                    val quantity = cartlistFromDB.get("quantity")
 
-//        val additems = CartItem(name, price)
-//        cartitems.add(additems)
-//        Log.e("NAME: ", "${cartitems.size}")
+                    val cartItem = CartItem()
+                    cartItem.key = key
+                    cartItem.name = name.toString()
+                    cartItem.image = image.toString()
+                    cartItem.price = price.toString()
+                    cartItem.quantity = quantity.toString().toInt()
 
-//        tvTest.text = intent.getStringExtra("name")
-
-//        if (recievedName != null) {
-//            val name = recievedName
-////            cartitems.add(name)
-//        }
-
-        btnAddCart = findViewById(R.id.btn_checkout)
-        btnAddCart.setOnClickListener{
-            Toast.makeText(this, "Checkout", Toast.LENGTH_LONG).show()
-//            Toast.makeText(this, "${cartitems.size}", Toast.LENGTH_LONG).show()
-//            Log.e("CartItems: ", "$cartitems")
+                    cartitems.add(cartItem)
+                }
+                rcItems.adapter?.notifyDataSetChanged()
+            }
         }
     }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.activity_cart, container, false)
+
+        rcItems = view.findViewById(R.id.listItems)
+        rcItems.layoutManager = LinearLayoutManager(context)
+        rcItems.adapter = MyCartAdapter(cartitems)
+
+        return view
+    }
 
 }
