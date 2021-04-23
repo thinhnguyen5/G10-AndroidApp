@@ -1,19 +1,13 @@
 package fi.oamk.androidapp
 
-import android.icu.util.TimeZone.getDefault
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
 import android.widget.*
-import com.google.common.eventbus.EventBus
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_details.*
-import kotlinx.android.synthetic.main.fragment_profile.*
-import java.util.Locale.getDefault
 
 class DetailsActivity : AppCompatActivity() {
 //class DetailsActivity : Fragment() {
@@ -67,9 +61,9 @@ class DetailsActivity : AppCompatActivity() {
         database.child("items").child(key).get().addOnSuccessListener {
             if (it.value != null) {
                 val item = it.value as HashMap<String, Any>
-                val image = item.get("image")
-                val name = item.get("name")
-                val price = item.get("price")
+                val image = item.get("image").toString()
+                val name = item.get("name").toString()
+                val price = item.get("price").toString()
                 val status = item.get("status")
 
                 Picasso.get().load(image.toString()).into(ivImage)
@@ -85,24 +79,27 @@ class DetailsActivity : AppCompatActivity() {
                 else {
                     btnAddCart.setOnClickListener{
                         val quantity = etQuantity.text.toString().trim()
-                        if (quantity.isEmpty()) {
+                        if (quantity == null) {
                             etQuantity.setError("Enter the quantity");
                             etQuantity.requestFocus();
                             return@setOnClickListener
                         }
-                        val ref = FirebaseDatabase.getInstance().getReference("cart")
+
+//                        val totalPrice = price.toInt()
+
+                        val ref = FirebaseDatabase.getInstance().getReference("cartitems")
 //                        val cartItem = CartItem(key, email, name as String,
 //                            image as String, price as String, quantity as Int, price as Int)
-                        val cartItem = CartItem()
-                        cartItem.key = key
-                        cartItem.name = name.toString()
-                        cartItem.email = email
-                        cartItem.image = image.toString()
-                        cartItem.price = price.toString()
-                        cartItem.quantity = quantity.toInt()
-                        cartItem.totalPrice = price.toString().toInt()
+                        val cartitem = Cart(key, name, image, price, quantity) //totalPrice)
+//                        cartItem.key = key
+//                        cartItem.name = name.toString()
+//                       cartItem.email = email
+//                        cartItem.image = image.toString()
+//                        cartItem.price = price.toString()
+//                        cartItem.quantity = quantity.toInt()
+//                        cartItem.totalPrice = price.toString().toInt()
 
-                        ref.child(key).setValue(cartItem).addOnSuccessListener {
+                        ref.child(key).setValue(cartitem).addOnSuccessListener {
                             Toast.makeText(this,"Success add to Cart", Toast.LENGTH_LONG).show()
                         }
                             .addOnFailureListener {

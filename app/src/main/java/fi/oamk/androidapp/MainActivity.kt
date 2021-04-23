@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showCart() {
-        startActivity(Intent(this, CartActivity::class.java).apply {
+        startActivity(Intent(this, CartFragment::class.java).apply {
             putExtra("email", email)
         })
     }

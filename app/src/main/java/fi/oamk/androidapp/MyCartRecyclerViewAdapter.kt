@@ -8,27 +8,25 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_details.*
-import java.lang.StringBuilder
 
 
-class MyCartAdapter(
-    private val values: ArrayList<Cart>)
-    : RecyclerView.Adapter<MyCartAdapter.ViewHolder>() {
+class MyCartRecyclerViewAdapter(
+        private val values: ArrayList<Cart>)
+    : RecyclerView.Adapter<MyCartRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.cart_item, parent, false)
+                .inflate(R.layout.cart_item, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val cartlist = values[position]
-        holder.nameView.text = cartlist.name
-        Picasso.get().load(cartlist.image).into(holder.imageView)
-        holder.priceView.text = cartlist.price
-        holder.quantityView.text = cartlist.quantity.toString()
-        holder.btn_Delete.tag = cartlist.key
+        val cart = values[position]
+        holder.nameView.text = cart.name
+        Picasso.get().load(cart.image).into(holder.imageView)
+        holder.priceView.text = cart.price
+        holder.quantityView.text = cart.quantity.toString()
+        holder.btn_Delete.tag = cart.key
 
 //        holder.btn_Minus.setOnClickListener{minusCartItem(holder,item)}
     }
@@ -53,4 +51,3 @@ class MyCartAdapter(
         val btn_Delete: Button = view.findViewById(R.id.btnDelete)
     }
 }
-
