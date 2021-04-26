@@ -7,18 +7,25 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import java.util.zip.Inflater
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var  rcList :RecyclerView
     private  lateinit var  adapter: MyItemRecyclerViewAdapter
+    private lateinit var database: DatabaseReference
+
+    private lateinit var items: ArrayList<Item>
 
 
     var email: String = ""
@@ -26,6 +33,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        database = Firebase.database.reference
+
+        items = arrayListOf()
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val navController = findNavController(R.id.fragment)
         val appBarConfiguration = AppBarConfiguration(setOf(R.id.firstFragment, R.id.secondFragment, R.id.profileFragment))
@@ -38,64 +48,49 @@ class MainActivity : AppCompatActivity() {
         email = intent.getStringExtra("email").toString()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.app_menu,menu)
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        val inflater = menuInflater
+//        inflater.inflate(R.menu.app_menu,menu)
+//
+//        val searchItem = menu?.findItem(R.id.search)
+//        val searchView = searchItem?.actionView as SearchView
+//
+//        searchView.queryHint = "Search..."
+//        searchView.isIconifiedByDefault = false
+//
+//        val magId: Int = resources.getIdentifier("android:id/search_mag_icon", null, null);
+//        val magImage: ImageView = searchView!!.findViewById(magId);
+//        val searchViewGroup: ViewGroup = magImage.getParent() as ViewGroup
+//        searchViewGroup.removeView(magImage)
 
-        var searchItem = menu!!.findItem(R.id.search)
-        var searchView = searchItem.actionView as SearchView
 
-        searchView.queryHint = "Search..."
-        searchView.isIconifiedByDefault = false
+//        val queryTextListener = object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextChange(p0: String?): Boolean {
+//                adapter.filter.filter(p0)
+//                return true
+//            }
+////
+//            override fun onQueryTextSubmit(p0: String?): Boolean {
+//                TODO("Not yet implemented")
+//            }
+//        }
+//        searchView.setOnQueryTextListener(queryTextListener)
+//
+//        val actionExpandListener = object : MenuItem.OnActionExpandListener {
+//            override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
+//                adapter.filter.filter("")
+//                return true
+//            }
+//
+//            override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+//                return true
+//            }
+//        }
+//
+//        searchItem.setOnActionExpandListener(actionExpandListener)
 
-        val magId: Int = resources.getIdentifier("android:id/search_mag_icon", null, null);
-        val magImage: ImageView = searchView!!.findViewById(magId);
-        val searchViewGroup: ViewGroup = magImage.getParent() as ViewGroup
-        searchViewGroup.removeView(magImage)
-
-
-        val queryTextListener = object : SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(p0: String?): Boolean {
-                adapter.filter.filter(p0)
-                return true
-            }
-
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                TODO("Not yet implemented")
-            }
-        }
-        searchView.setOnQueryTextListener(queryTextListener)
-
-        val actionExpandListener = object : MenuItem.OnActionExpandListener {
-            override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
-                adapter.filter.filter("")
-                return true
-            }
-
-            override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
-                return true
-            }
-        }
-
-        searchItem.setOnActionExpandListener(actionExpandListener)
-
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.cart -> {
-            this.showCart()
-            true
-        } else -> {
-            super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun showCart() {
-        startActivity(Intent(this, CartFragment::class.java).apply {
-            putExtra("email", email)
-        })
-    }
+//        return super.onCreateOptionsMenu(menu)
+//    }
 
 
 //    fun signup(view: View) {
@@ -121,4 +116,17 @@ class MainActivity : AppCompatActivity() {
             putExtra("email", email)
         })
     }
+
+    fun setting(item: MenuItem) {
+        startActivity(Intent(this, ChangepasswordActivity::class.java).apply {
+        })
+    }
+
+    fun cart(item: MenuItem) {
+        startActivity(Intent(this, CartActivity::class.java).apply {
+        })
+    }
+
 }
+
+
