@@ -17,15 +17,28 @@
             android:layout_marginTop="20dp"
             android:layout_marginLeft="15dp"/>
 
-        <TextView
-            android:id="@+id/emailAddressTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Email Address:"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/greeting"
-            app:layout_constraintLeft_toLeftOf="@+id/greeting"
-            android:textSize="20sp"/>
+    <ImageView
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/mixi"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.131" />
+
+    <TextView
+        android:id="@+id/emailAddressTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:text="Email Address:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@+id/greeting"
+        app:layout_constraintTop_toBottomOf="@+id/greeting" />
 
     <TextView
         android:id="@+id/email"
@@ -34,7 +47,8 @@
         app:layout_constraintTop_toBottomOf="@+id/emailAddressTitle"
         app:layout_constraintLeft_toLeftOf="@+id/emailAddressTitle"
         android:layout_marginLeft="30dp"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:layout_marginTop="40dp"/>
 
 
     <TextView
@@ -50,12 +64,13 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.766"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.507" />
 
     <Button
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
@@ -70,6 +85,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.852"
         tools:ignore="OnClick" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

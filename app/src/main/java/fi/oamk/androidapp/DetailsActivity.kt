@@ -105,9 +105,9 @@ class DetailsActivity : AppCompatActivity() {
                         ref.child(key).setValue(cartItem).addOnSuccessListener {
                             Toast.makeText(this,"Success add to Cart", Toast.LENGTH_LONG).show()
                         }
-                            .addOnFailureListener {
-                                Toast.makeText(this, "Fail", Toast.LENGTH_LONG).show()
-                            }
+                                .addOnFailureListener {
+                                    Toast.makeText(this, "Fail", Toast.LENGTH_LONG).show()
+                                }
                     }
                 }
             }

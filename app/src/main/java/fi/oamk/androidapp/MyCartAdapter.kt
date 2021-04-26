@@ -13,12 +13,12 @@ import java.lang.StringBuilder
 
 
 class MyCartAdapter(
-    private val values: ArrayList<CartItem>)
+        private val values: ArrayList<CartItem>)
     : RecyclerView.Adapter<MyCartAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.cart_item, parent, false)
+                .inflate(R.layout.cart_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -53,4 +53,3 @@ class MyCartAdapter(
         val btn_Delete: Button = view.findViewById(R.id.btnDelete)
     }
 }
-

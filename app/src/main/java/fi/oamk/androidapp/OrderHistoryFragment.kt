@@ -1,13 +1,13 @@
 package fi.oamk.androidapp
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.SearchView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -19,9 +19,11 @@ class OrderHistoryFragment : Fragment() {
 
     private lateinit var history: ArrayList<OrderHistory>
     private lateinit var rcList: RecyclerView
+    private  lateinit var adapter: MyOrderHistoryRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
 
         database = Firebase.database.reference
 
@@ -58,8 +60,53 @@ class OrderHistoryFragment : Fragment() {
 
         rcList = view.findViewById(R.id.list1)
         rcList.layoutManager = LinearLayoutManager(context)
-        rcList.adapter = MyOrderHistoryRecyclerViewAdapter(history)
-
+        //rcList.adapter = MyOrderHistoryRecyclerViewAdapter(history)
+        adapter = MyOrderHistoryRecyclerViewAdapter(history)
+        rcList.adapter = adapter
         return view
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.history_menu,menu)
+        var searchItem = menu.findItem(R.id.search)
+        var searchView = searchItem.actionView as SearchView
+
+        searchView.queryHint="Search..."
+        searchView.isIconifiedByDefault = false
+
+        val magId: Int = resources.getIdentifier("android:id/search_mag_icon", null, null);
+        val magImage: ImageView = searchView!!.findViewById(magId);
+        val searchViewGroup: ViewGroup = magImage.getParent() as ViewGroup
+        searchViewGroup.removeView(magImage)
+
+
+        val queryTextListener = object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(p0: String?): Boolean {
+                adapter.filter.filter(p0)
+                return true
+            }
+            //
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                TODO("Not yet implemented")
+            }
+        }
+        searchView.setOnQueryTextListener(queryTextListener)
+
+        val actionExpandListener = object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
+                adapter.filter.filter("")
+                return true
+            }
+
+            override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+                return true
+            }
+        }
+
+        searchItem.setOnActionExpandListener(actionExpandListener)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
 }

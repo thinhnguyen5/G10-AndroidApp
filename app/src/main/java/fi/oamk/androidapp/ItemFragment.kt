@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.SearchView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -23,6 +24,7 @@ class ItemFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
 
         database = Firebase.database.reference
 
@@ -63,6 +65,48 @@ class ItemFragment : Fragment() {
         rcList.adapter = adapter
 
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.app_menu,menu)
+        var searchItem = menu.findItem(R.id.search)
+        var searchView = searchItem.actionView as SearchView
+
+        searchView.queryHint="Search..."
+        searchView.isIconifiedByDefault = false
+
+        val magId: Int = resources.getIdentifier("android:id/search_mag_icon", null, null);
+        val magImage: ImageView = searchView!!.findViewById(magId);
+        val searchViewGroup: ViewGroup = magImage.getParent() as ViewGroup
+        searchViewGroup.removeView(magImage)
+
+
+        val queryTextListener = object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(p0: String?): Boolean {
+                adapter.filter.filter(p0)
+                return true
+            }
+//
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                TODO("Not yet implemented")
+            }
+        }
+        searchView.setOnQueryTextListener(queryTextListener)
+
+        val actionExpandListener = object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
+                adapter.filter.filter("")
+                return true
+            }
+
+            override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+                return true
+            }
+        }
+
+        searchItem.setOnActionExpandListener(actionExpandListener)
+
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
 
