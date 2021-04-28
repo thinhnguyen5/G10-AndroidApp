@@ -47,62 +47,6 @@ class MainActivity : AppCompatActivity() {
 
         email = intent.getStringExtra("email").toString()
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        val inflater = menuInflater
-//        inflater.inflate(R.menu.app_menu,menu)
-//
-//        val searchItem = menu?.findItem(R.id.search)
-//        val searchView = searchItem?.actionView as SearchView
-//
-//        searchView.queryHint = "Search..."
-//        searchView.isIconifiedByDefault = false
-//
-//        val magId: Int = resources.getIdentifier("android:id/search_mag_icon", null, null);
-//        val magImage: ImageView = searchView!!.findViewById(magId);
-//        val searchViewGroup: ViewGroup = magImage.getParent() as ViewGroup
-//        searchViewGroup.removeView(magImage)
-
-
-//        val queryTextListener = object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextChange(p0: String?): Boolean {
-//                adapter.filter.filter(p0)
-//                return true
-//            }
-////
-//            override fun onQueryTextSubmit(p0: String?): Boolean {
-//                TODO("Not yet implemented")
-//            }
-//        }
-//        searchView.setOnQueryTextListener(queryTextListener)
-//
-//        val actionExpandListener = object : MenuItem.OnActionExpandListener {
-//            override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
-//                adapter.filter.filter("")
-//                return true
-//            }
-//
-//            override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
-//                return true
-//            }
-//        }
-//
-//        searchItem.setOnActionExpandListener(actionExpandListener)
-
-//        return super.onCreateOptionsMenu(menu)
-//    }
-
-
-//    fun signup(view: View) {
-//        // add method
-//        val intent = Intent(this, RegisterActivity::class.java)
-//        startActivity(intent)
-//    }
-//
-//    fun signin(view: View) {
-//        val intent = Intent(this,LoginActivity::class.java)
-//        startActivity(intent)
-//    }
     fun signup(view: View) {
         // add method
         val intent = Intent(this,RegisterActivity::class.java)
