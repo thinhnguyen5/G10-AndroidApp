@@ -29,16 +29,20 @@ class MyOrderHistoryRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val orderhistory = filteredList[position]
         holder.nameView.text = orderhistory.name
-        holder.dateView.text = orderhistory.date
-        holder.userView.text = orderhistory.user
+        Picasso.get().load(orderhistory.image).into(holder.imageView)
+        holder.quantityView.text = orderhistory.quantity
+        holder.emailView.text = orderhistory.email
+        holder.priceView.text = orderhistory.price
     }
 
     override fun getItemCount(): Int = filteredList.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nameView: TextView = view.findViewById(R.id.name)
-        val dateView: TextView = view.findViewById(R.id.date)
-        val userView: TextView = view.findViewById(R.id.user)
+        val imageView: ImageView = view.findViewById(R.id.image)
+        val quantityView: TextView = view.findViewById(R.id.quantity)
+        val emailView: TextView = view.findViewById(R.id.email)
+        val priceView: TextView = view.findViewById(R.id.price)
     }
 
     override fun getFilter(): Filter {

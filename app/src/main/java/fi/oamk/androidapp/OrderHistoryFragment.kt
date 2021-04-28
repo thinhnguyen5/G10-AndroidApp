@@ -17,7 +17,7 @@ class OrderHistoryFragment : Fragment() {
 
     private lateinit var database: DatabaseReference
 
-    private lateinit var history: ArrayList<OrderHistory>
+    private lateinit var cart: ArrayList<OrderHistory>
     private lateinit var rcList: RecyclerView
     private  lateinit var adapter: MyOrderHistoryRecyclerViewAdapter
 
@@ -27,27 +27,29 @@ class OrderHistoryFragment : Fragment() {
 
         database = Firebase.database.reference
 
-        history = arrayListOf()
+        cart = arrayListOf()
 
 //        for (i in 0..10) {
 //            items.add("Item $i")
 //        }
-        database.child("history").get().addOnSuccessListener {
+        database.child("cart").get().addOnSuccessListener {
             if (it.value != null) {
 //                Log.e("day ne: ", "$it")
-                val historyFromDB = it.value as HashMap<String, Any>
-                history.clear()
-                historyFromDB.map { (key, value) ->
+                val cartFromDB = it.value as HashMap<String, Any>
+                cart.clear()
+                cartFromDB.map { (key, value) ->
                     val orderhistoryFromDb = value as HashMap<String, Any>
                     val name = orderhistoryFromDb.get("name").toString()
-                    val date = orderhistoryFromDb.get("date").toString()
-                    val user = orderhistoryFromDb.get("user").toString()
+                    val image = orderhistoryFromDb.get("image").toString()
+                    val quantity = orderhistoryFromDb.get("quantity").toString()
+                    val email = orderhistoryFromDb.get("email").toString()
+                    val price = orderhistoryFromDb.get("price").toString()
 
 //                    val tam = price + 2
-                    val orderhistory = OrderHistory(key, name, date, user)
+                    val orderhistory = OrderHistory(key, name, image, quantity, email, price)
 //                    Log.e("item", "(($price)+2)")
 
-                    history.add(orderhistory)
+                    cart.add(orderhistory)
                 }
                 rcList.adapter?.notifyDataSetChanged()
             }
@@ -61,7 +63,7 @@ class OrderHistoryFragment : Fragment() {
         rcList = view.findViewById(R.id.list1)
         rcList.layoutManager = LinearLayoutManager(context)
         //rcList.adapter = MyOrderHistoryRecyclerViewAdapter(history)
-        adapter = MyOrderHistoryRecyclerViewAdapter(history)
+        adapter = MyOrderHistoryRecyclerViewAdapter(cart)
         rcList.adapter = adapter
         return view
     }
